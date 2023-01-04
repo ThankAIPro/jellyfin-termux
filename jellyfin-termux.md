@@ -51,7 +51,7 @@ Method 2:
 
 5. Install necessary packages (skip wget if you have it installed in termux)
 ```
-apt install wget libicu70
+apt install wget libicu70 ca-certificates
 ```
 
 6. Make a new folder in /opt by the name jellyfin and cd into it
