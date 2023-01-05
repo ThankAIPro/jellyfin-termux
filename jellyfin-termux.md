@@ -95,7 +95,7 @@ $JELLYFINDIR/jellyfin/jellyfin \
  -l $JELLYFINDIR/log \
  --ffmpeg /data/data/com.termux/files/usr/bin/ffmpeg
 ```
-* Save and exit nano by pressing `CTRL + x` then `y` them `enter`
+* Save and exit nano by pressing `CTRL + x` then `y` then `enter`
 
 12. Make it executable 
 ```
