@@ -26,53 +26,64 @@ proot-distro login ubuntu
 apt update && apt upgrade -y
 ```
 
+5. .NET 7.0 [workaround](https://github.com/dotnet/runtime/issues/85556):
+* Use nano (or editor of your choice) to make a file in `/etc/profile.d`
+```
+nano /etc/profile.d/02-dotnet-fix.sh
+```
+* Paste the following to set the value of `DOTNET_GCHeapHardLimit` to `1C0000000` (You might need to lower the value to get it to work):
+```
+export DOTNET_GCHeapHardLimit=1C0000000
+```
+* Save and exit nano by pressing `CTRL + x` then `y` then `enter`
+* Make it executable
+```
+chmod +x /etc/profile.d/02-dotnet-fix.sh
+```
+* Logout and log back into proot
+
 Method 1:
 
-5. Install sudo curl and gnupg
+6. Install sudo curl and gnupg
 ```
 apt install sudo curl gnupg -y
 ```
 
-6. Follow the step 3 to 6 in the official ubuntu installation guide for Jellyfin [here](https://jellyfin.org/docs/general/installation/linux#ubuntu)
+7. Follow the step 2 to 6 in the official ubuntu installation guide for Jellyfin [here](https://jellyfin.org/docs/general/installation/linux#ubuntu)
 
 
-7. Create a symbolic link for Jellyfin web client (as it's in the wrong folder)
+8. Create a symbolic link for Jellyfin web client (as it's in the wrong folder)
 ```
 ln -s /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
 ```
-8. Run Jellyfin
+9. Run Jellyfin
 ```
 jellyfin
 ```
-9. Goto http://localhost:8096 to setup Jellyfin
+10. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
 
 
 Method 2:
 
-5. Install necessary packages (skip wget if you have it installed in termux)
+6. Install necessary packages (skip wget if you have it installed in termux, also replace `74` with the latest version of libicu)
 ```
-apt install wget libicu70 ca-certificates -y
+apt install wget libicu74 ca-certificates -y
 ```
 
-6. Make a new folder in /opt by the name jellyfin and cd into it
+7. Make a new folder in /opt by the name jellyfin and cd into it
 ```
 mkdir /opt/jellyfin
 cd /opt/jellyfin
 ```
 
-7. Download the latest generic linux build for your architecture from [here](https://jellyfin.org/downloads/linux) with `wget` (make sure you down the correct architecture for you device)
+8. Download the latest generic linux build for your architecture from [here](https://jellyfin.org/downloads/linux) with `wget` (make sure you download the correct architecture for you device)
 ```
-wget https://repo.jellyfin.org/releases/server/linux/stable/combined/jellyfin_10.8.8_arm64.tar.gz
-```
-
-8. Extract it with tar
-```
-tar xvzf jellyfin_10.8.8_arm64.tar.gz
+wget https://repo.jellyfin.org/files/server/linux/latest-stable/arm64/jellyfin_10.10.6-arm64.tar.gz
 ```
 
-9. Create a symbolic link so you can easily upgrade
+9. Extract it with tar
 ```
-ln -s jellyfin_10.8.8 jellyfin
+tar xvzf jellyfin_10.10.6-arm64.tar.gz
 ```
 
 10. Create four sub-directories for Jellyfin data
@@ -107,4 +118,4 @@ chmod +x jellyfin.sh
 /opt/jellyfin/jellyfin.sh
 ```
 
-14. Goto http://localhost:8096 to setup Jellyfin
+14. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
