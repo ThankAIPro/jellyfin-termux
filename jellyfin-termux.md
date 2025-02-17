@@ -67,7 +67,7 @@ Method 2:
 
 6. Install necessary packages (skip wget if you have it installed in termux, also replace `74` with the latest version of libicu)
 ```
-apt install wget libicu74 ca-certificates -y
+apt install wget libicu74 libfontconfig1 ca-certificates -y
 ```
 
 7. Make a new folder in /opt by the name jellyfin and cd into it
