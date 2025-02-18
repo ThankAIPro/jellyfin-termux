@@ -56,10 +56,13 @@ apt install sudo curl gnupg -y
 ```
 ln -s /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
 ```
+
 9. Run Jellyfin
 ```
 jellyfin
 ```
+* Note: if you get network related errors add `--nonetchange` parameter to jellyfin
+
 10. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
 
 
@@ -106,6 +109,7 @@ $JELLYFINDIR/jellyfin/jellyfin \
  -l $JELLYFINDIR/log \
  --ffmpeg /data/data/com.termux/files/usr/bin/ffmpeg
 ```
+* Note: if you get network related errors add `--nonetchange` parameter to jellyfin in the `jellyfin.sh`
 * Save and exit nano by pressing `CTRL + x` then `y` then `enter`
 
 12. Make it executable 
@@ -119,3 +123,6 @@ chmod +x jellyfin.sh
 ```
 
 14. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
+
+
+Thanks to @vikoadi and @t-e-s-tweb for `DOTNET_GCHeapHardLimit=1C0000000` and `--nonetchange` fix
