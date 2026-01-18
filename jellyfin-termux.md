@@ -2,7 +2,7 @@
 This guide shows two methods of installing Jellyfin on termux
 
 Note: only tested on aarch64/arm64
-Note: I am not updating it anymore as you can install Jellyfin directly in termux now, just install `jellyfin-server` package in termux, tho you might have issues the jellyfin's ffmpeg if so then use `jellyfin --ffmpeg $(which ffmpeg)` to jellyfin instead
+Note: I am not updating it anymore as you can install Jellyfin directly in termux now, just install `jellyfin-server` package in termux, tho you might have issues the jellyfin's ffmpeg if so then use `jellyfin --ffmpeg $(which ffmpeg)` to run jellyfin instead
 
 These steps are same for both methods:
 
