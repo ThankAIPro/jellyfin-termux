@@ -1,107 +1,113 @@
-# Install Jellyfin on Termux [In Proot]
-This guide shows two methods of installing Jellyfin on termux
+# Instale o Jellyfin no Termux [pelo Proot]
+Este guia mostra dois métodos para instalar o Jellyfin no Termux
 
-Note: only tested on aarch64/arm64
+Observação: testado apenas em aarch64/arm64
 
-Note: I am not updating it anymore as you can install Jellyfin directly in termux now, just install `jellyfin-server` package in termux, tho you might have issues the jellyfin's ffmpeg if so then use `jellyfin --ffmpeg $(which ffmpeg)` to run jellyfin instead
+Nota: Não estou mais atualizando este guia, pois agora você pode instalar o Jellyfin diretamente no Termux. Basta instalar o pacote `jellyfin-server` no Termux. No entanto, muitos usuários tiveram problemas com o dotnet da Microslop e resolvi deixar esse aqui mesmo. 
 
-These steps are same for both methods:
+Esses passos são os mesmos para ambos os métodos:
 
-1. Update the repo
+1. Atualize o repositório
 ```
 pkg update
 ```
 
-2. Install proot-distro and ffmpeg (ffmpeg is only required in Method 2)
+2. Instale o proot-distro e o ffmpeg (o ffmpeg só é necessário no Método 2).
 ```
 pkg install proot-distro ffmpeg -y
 ```
 
-3. Install ubuntu and Login to it
+3. Instale o Ubuntu e faça login.
 ```
 proot-distro install ubuntu
 proot-distro login ubuntu
 ```
 
-4. Update and upgrade the packages in ubuntu
+4. Atualize e faça o upgrade dos pacotes no Ubuntu.
 ```
 apt update && apt upgrade -y
 ```
 
-5. .NET 7.0 [workaround](https://github.com/dotnet/runtime/issues/85556):
-* Use nano (or editor of your choice) to make a file in `/etc/profile.d`
+5. .NET 7.0 [solução alternativa](https://github.com/dotnet/runtime/issues/85556):
+* Use o nano (ou o editor de sua preferência) para criar um arquivo em `/etc/profile.d`.
 ```
 nano /etc/profile.d/02-dotnet-fix.sh
 ```
-* Paste the following to set the value of `DOTNET_GCHeapHardLimit` to `1C0000000` (You might need to lower the value to get it to work):
+* Cole o seguinte para definir o valor de `DOTNET_GCHeapHardLimit` para `1C0000000` (Talvez seja necessário diminuir o valor para que funcione):
 ```
 export DOTNET_GCHeapHardLimit=1C0000000
 ```
-* Save and exit nano by pressing `CTRL + x` then `y` then `enter`
-* Make it executable
+* Salve e saia do nano pressionando `CTRL + x`, depois `y` e, em seguida, `enter`.
+* Torne-o executável.
 ```
 chmod +x /etc/profile.d/02-dotnet-fix.sh
 ```
-* Logout and log back into proot
+* Saia da sua conta e entre novamente no Proot.
 
-Method 1:
+Método 1:
 
-6. Install sudo curl and gnupg
+6. Instale sudo curl e gnupg
 ```
 apt install sudo curl gnupg -y
 ```
 
-7. Follow the step 2 to 6 in the official ubuntu installation guide for Jellyfin [here](https://jellyfin.org/docs/general/installation/linux#ubuntu)
+7. Baixe e verifique o script e, em seguida, execute-o em seu sistema (requer curl e sha256sum):
 ```
-testando código
+curl -s https://repo.jellyfin.org/install-debuntu.sh -O && \
+curl -s https://repo.jellyfin.org/install-debuntu.sh.sha256sum -O && \
+sha256sum -c install-debuntu.sh.sha256sum
+```
+Em seguida, execute-o com:
+```
+sudo bash install-debuntu.sh
 ```
 
-8. Create a symbolic link for Jellyfin web client (as it's in the wrong folder)
+8. Crie um link simbólico para o cliente web Jellyfin (pois ele está na pasta errada).
 ```
 ln -s /usr/share/jellyfin/web /usr/lib/jellyfin/bin/jellyfin-web
 ```
 
-9. Run Jellyfin
+9. Execute o Jellyfin
 ```
 jellyfin
 ```
-* Note: if you get network related errors add `--nonetchange` parameter to jellyfin
+* Observação: se você receber erros relacionados à rede, adicione o parâmetro `--nonetchange` ao Jellyfin.
 
-10. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
+10. Aguarde alguns minutos para que a inicialização seja concluída e, em seguida, acesse http://192.168.x.x:8096 para configurar o Jellyfin.
 
 
-Method 2:
+Método 2: Opcional
 
-6. Install necessary packages (skip wget if you have it installed in termux, also replace `74` with the latest version of libicu)
+6. Instale os pacotes necessários (ignore o wget se você o tiver instalado no Termux; substitua também `74` pela versão mais recente do libicu).
 ```
 apt install wget libicu74 libfontconfig1 ca-certificates -y
 ```
 
-7. Make a new folder in /opt by the name jellyfin and cd into it
+7. Crie uma nova pasta em /opt com o nome jellyfin e acesse-a pelo comando cd.
 ```
 mkdir /opt/jellyfin
 cd /opt/jellyfin
 ```
 
-8. Download the latest generic linux build for your architecture from [here](https://jellyfin.org/downloads/linux) with `wget` (make sure you download the correct architecture for you device)
+8. Baixe a versão genérica mais recente do Linux para sua arquitetura em [here](https://jellyfin.org/downloads/linux) com `wget` (Certifique-se de baixar a arquitetura correta para o seu dispositivo.)
 ```
 wget https://repo.jellyfin.org/files/server/linux/latest-stable/arm64/jellyfin_10.10.6-arm64.tar.gz
 ```
 
-9. Extract it with tar
+9. Extraia-o com tar
 ```
 tar xvzf jellyfin_10.10.6-arm64.tar.gz
 ```
 
-10. Create four sub-directories for Jellyfin data
+10. Crie quatro subdiretórios para os dados do Jellyfin.
 ```
 mkdir data cache config log
 ```
-11. Use nano to make a script to run Jellyfin
+11. Use o nano para criar um script para executar o Jellyfin.
 ```
 nano jellyfin.sh
 ```
-* Paste the following:
+* Cole o seguinte:
 ```
 #!/bin/bash
 JELLYFINDIR="/opt/jellyfin"
@@ -113,20 +119,20 @@ $JELLYFINDIR/jellyfin/jellyfin \
  -l $JELLYFINDIR/log \
  --ffmpeg /data/data/com.termux/files/usr/bin/ffmpeg
 ```
-* Note: if you get network related errors add `--nonetchange` parameter to jellyfin in the `jellyfin.sh`
-* Save and exit nano by pressing `CTRL + x` then `y` then `enter`
+* Observação: se você receber erros relacionados à rede, adicione o parâmetro `--nonetchange` ao Jellyfin no arquivo `jellyfin.sh`.
+* Salve e saia do nano pressionando `CTRL + x`, depois `y` e, em seguida, `enter`.
 
-12. Make it executable 
+12. Torne-o executável. 
 ```
 chmod +x jellyfin.sh
 ```
 
-13. Run it
+13. Execute-o
 ```
 /opt/jellyfin/jellyfin.sh
 ```
 
-14. Give it a few minutes to finish startup then goto http://localhost:8096 to setup Jellyfin
+14. Aguarde alguns minutos para que a inicialização seja concluída e, em seguida, acesse http://192.168.x.x:8096 para configurar o Jellyfin.
 
 
-Thanks to @vikoadi and @t-e-s-tweb for `DOTNET_GCHeapHardLimit=1C0000000` and `--nonetchange` fix
+Obrigado a @sdshan8 pela aula
