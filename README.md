@@ -10,11 +10,17 @@ A proposta é reaproveitar dispositivos antigos que normalmente ficariam esqueci
 🚀 O Que Você Vai Aprender
 
 ✅ Instalar o Termux corretamente
+
 ✅ Atualizar os pacotes do sistema
+
 ✅ Configurar o ambiente Linux dentro do Android
+
 ✅ Instalar o Jellyfin
+
 ✅ Configurar bibliotecas de mídia
+
 ✅ Acessar o servidor pela rede local
+
 ✅ Utilizar um celular antigo como mini servidor doméstico
 
 📋 Requisitos
