@@ -85,9 +85,13 @@ Sugestão de estrutura:
 
 Media/
 ├── Filmes/
+
 ├── Series/
+
 ├── Musicas/
+
 ├── Animes/
+
 └── Documentarios/
 
 🌐 Acessando o Servidor
