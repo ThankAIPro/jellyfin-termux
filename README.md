@@ -23,7 +23,9 @@ A proposta é reaproveitar dispositivos antigos que normalmente ficariam esqueci
 
 ✅ Utilizar um celular antigo como mini servidor doméstico
 
+
 📋 Requisitos
+
 
 Hardware
 Smartphone Android antigo
