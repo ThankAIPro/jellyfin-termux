@@ -91,6 +91,7 @@ Dependendo da versão utilizada, os comandos podem sofrer alterações.
 Sugestão de estrutura:
 
 Media/
+
 ├── Filmes/
 
 ├── Series/
