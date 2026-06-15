@@ -123,11 +123,17 @@ Prefira conexão Wi-Fi de 5 GHz quando disponível.
 Faça backups periódicos dos seus dados.
 
 🎯 Vantagens
+
 ✔ Baixo custo
+
 ✔ Reaproveitamento de hardware antigo
+
 ✔ Consumo reduzido de energia
+
 ✔ Fácil manutenção
+
 ✔ Plataforma totalmente gratuita
+
 ✔ Sem mensalidades
 
 📺 Vídeo Tutorial
@@ -145,6 +151,7 @@ Termux
 Automação
 Servidores domésticos
 Tecnologia e dispositivos móveis
+
 🤝 Contribuindo
 
 Contribuições são bem-vindas.
