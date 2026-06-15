@@ -116,10 +116,15 @@ http://192.168.0.100:8096
 Abra o endereço em qualquer dispositivo conectado à mesma rede.
 
 🔋 Recomendações
+
 Mantenha o aparelho conectado ao carregador.
+
 Desative otimizações de bateria.
+
 Utilize armazenamento externo para grandes bibliotecas.
+
 Prefira conexão Wi-Fi de 5 GHz quando disponível.
+
 Faça backups periódicos dos seus dados.
 
 🎯 Vantagens
