@@ -23,9 +23,7 @@ A proposta é reaproveitar dispositivos antigos que normalmente ficariam esqueci
 
 ✅ Utilizar um celular antigo como mini servidor doméstico
 
-
 📋 Requisitos
-
 
 Hardware
 Smartphone Android antigo
@@ -38,6 +36,7 @@ Software
 Android 7 ou superior
 Termux atualizado
 Navegador Web
+
 📦 Instalação do Termux
 
 Baixe a versão mais recente do Termux:
