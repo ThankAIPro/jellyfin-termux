@@ -52,7 +52,9 @@ apt install sudo curl gnupg -y
 ```
 
 7. Follow the step 2 to 6 in the official ubuntu installation guide for Jellyfin [here](https://jellyfin.org/docs/general/installation/linux#ubuntu)
-
+```
+testando código
+```
 
 8. Create a symbolic link for Jellyfin web client (as it's in the wrong folder)
 ```
